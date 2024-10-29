@@ -21,10 +21,11 @@ public class calculator {
         } else if (operator == '*') {
             calculation = firstNum * secondNum;
         } else if (operator == '/') {
-            if(firstNum != 0 || secondNum != 0) {
+            if(secondNum != 0) {
                 calculation = firstNum / secondNum;
             } else {
                 System.out.println("Cannot divide by zero");
+                return;
             }
         } else {
             System.out.println("Invalid operator");
