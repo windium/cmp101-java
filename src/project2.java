@@ -2,45 +2,42 @@ import java.util.Scanner;
 
 public class project2 {
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        int size = keyboard.nextInt();
+        int size = scanner.nextInt();
+        String[] bumpers = scanner.next().split("");
 
-        String[] bumpers = keyboard.next().split("");
+        if(size != bumpers.length)
+            return;
 
-        int leftCount = fromLeft(bumpers, 0, size - 1);
-        int rightCount = fromRight(bumpers, 0, 0);
+        int leftC = left(bumpers, 0, size - 1);
+        int rightC = right(bumpers, 0, 0);
 
-        int total = leftCount + rightCount;
+        System.out.println(leftC + rightC);
 
-        if (leftCount + rightCount > size) {
-            total = size;
-        }
-
-        System.out.println(total);
     }
 
-    public static int fromLeft(String[] bumpers, int count, int n) {
-        if(n == 0) {
+    public static int left(String[] bumpers, int count, int n) {
+        if (n < 0) {
             return count;
         }
+
         if (bumpers[n].equals("<")) {
-            count++;
-        } else {
             return count;
         }
-        return fromLeft(bumpers, count, n - 1);
+
+        return left(bumpers, count + 1, n - 1);
     }
 
-    public static int fromRight(String[] bumpers, int count, int n) {
-        if (n == bumpers.length - 1) {
+    public static int right(String[] bumpers, int count, int n) {
+        if (n > bumpers.length-1) {
             return count;
         }
+
         if (bumpers[n].equals(">")) {
-            count++;
-        } else {
             return count;
         }
-        return fromRight(bumpers, count, n + 1);
+
+        return right(bumpers, count + 1, n + 1);
     }
 }
